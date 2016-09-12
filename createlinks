@@ -27,3 +27,7 @@ event_actions('nethserver-ndpi-update', qw(
    nethserver-ndpi-conf 20
 ));
 
+event_templates('nethserver-ndpi-update',
+    '/etc/sysconfig/kernel'
+);
+
