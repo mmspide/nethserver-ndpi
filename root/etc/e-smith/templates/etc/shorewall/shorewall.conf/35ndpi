@@ -1,0 +1,3 @@
+
+MODULESDIR=+:/lib/modules/{ $OUT = qx(uname -r); chomp($OUT); }/extra/xt_ndpi
+
