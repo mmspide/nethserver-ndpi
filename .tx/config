@@ -6,4 +6,8 @@ source_file = locale/nethserver-ndpi.pot
 source_lang = en
 type = PO
 
+[nethserver.Ndpi]
+source_file = root/usr/share/nethesis/NethServer/Language/en/NethServer_Module_Ndpi.php
+source_lang = en
+type = PHP_ALT_ARRAY
 
