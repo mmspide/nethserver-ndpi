@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Find elrepo kernel and set it as default
-grubby --set-default /boot/vmlinuz-`rpm -q kernel-lt --queryformat "%{VERSION}-%{RELEASE}.%{ARCH}"`
