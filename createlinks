@@ -24,10 +24,5 @@ use esmith::Build::CreateLinks  qw(:all);
 
 event_actions('nethserver-ndpi-update', qw(
    initialize-default-databases 00
-   nethserver-ndpi-conf 20
 ));
-
-event_templates('nethserver-ndpi-update',
-    '/etc/sysconfig/kernel'
-);
 
