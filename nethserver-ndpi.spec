@@ -1,5 +1,5 @@
 Name: nethserver-ndpi
-Version: 1.0.0
+Version: 1.1.0
 Release: 1%{?dist}
 Summary: Conifigure ndpi kernel modules
 Source: %{name}-%{version}.tar.gz
@@ -33,6 +33,9 @@ rm -rf %{buildroot}
 %doc COPYING
 
 %changelog
+* Wed Dec 14 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.0-1
+- DPI: porting to kernel 3.10.0-514.el7.x86_64 - NethServer/dev#5170
+
 * Wed Sep 28 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.0-1
 - nDPI support: deep packet inspection - NethServer/dev#5102
 
