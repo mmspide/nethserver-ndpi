@@ -1,3 +1,4 @@
 
 MODULESDIR=+extra/xt_ndpi
+MODULESDIR=+weak-updates/xt_ndpi
 
