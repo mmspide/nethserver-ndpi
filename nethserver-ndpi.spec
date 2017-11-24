@@ -1,5 +1,5 @@
 Name: nethserver-ndpi
-Version: 1.1.0
+Version: 1.1.1
 Release: 1%{?dist}
 Summary: Conifigure ndpi kernel modules
 Source: %{name}-%{version}.tar.gz
@@ -33,6 +33,9 @@ rm -rf %{buildroot}
 %doc COPYING
 
 %changelog
+* Fri Nov 24 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.1-1
+- shorewall: some netfilter helpers not loaded - Bug NethServer/dev#5385
+
 * Wed Dec 14 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.0-1
 - DPI: porting to kernel 3.10.0-514.el7.x86_64 - NethServer/dev#5170
 
