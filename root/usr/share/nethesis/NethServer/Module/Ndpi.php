@@ -64,7 +64,7 @@ class Ndpi extends \Nethgui\Controller\TableController
 
     public function prepareViewForColumnKey(\Nethgui\Controller\Table\Read $action, \Nethgui\View\ViewInterface $view, $key, $values, &$rowMetadata)
     {
-        return ' <i class="fa fa-lg '.$this->getNdpiIcon(strtolower($key)).'" aria-hidden="true" style="margin: 5px"></i>' . $key;
+        return ' <i class="fa fa-lg '.$this->getNdpiIcon($key).'" aria-hidden="true" style="margin: 5px"></i>' . $key;
     }
 
 }
