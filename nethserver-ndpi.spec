@@ -1,5 +1,5 @@
 Name: nethserver-ndpi
-Version: 1.1.1
+Version: 1.1.2
 Release: 1%{?dist}
 Summary: Conifigure ndpi kernel modules
 Source: %{name}-%{version}.tar.gz
@@ -33,6 +33,9 @@ rm -rf %{buildroot}
 %doc COPYING
 
 %changelog
+* Thu May 17 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.2-1
+- nDPI: support CentOS 7.5 - NethServer/dev#5482
+
 * Fri Nov 24 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.1-1
 - shorewall: some netfilter helpers not loaded - Bug NethServer/dev#5385
 
