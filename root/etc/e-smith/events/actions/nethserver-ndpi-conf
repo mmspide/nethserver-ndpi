@@ -22,7 +22,7 @@
 # Force module reload
 # This is mandatory when switching from 2.2 to 2.4
 
-set -e 
+set -e
 
 # Make sure the module is not used
 shorewall clear

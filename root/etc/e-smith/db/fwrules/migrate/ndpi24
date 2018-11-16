@@ -8,7 +8,7 @@
 
     sub init_map()
     {
-        my $f = '/usr/share/nethserver-ndpi/ndpi-2.2.map';
+        my $f = '/usr/share/nethserver-ndpi/ndpi-1.7.map';
         open(my $fh, '<:encoding(UTF-8)', $f) or die "Could not open '$f': $!";
  
         while (my $row = <$fh>) {
