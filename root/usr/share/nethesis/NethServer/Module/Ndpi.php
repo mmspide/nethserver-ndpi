@@ -53,18 +53,11 @@ class Ndpi extends \Nethgui\Controller\TableController
         parent::initialize();
     }
 
-    private function getNdpiIcon($v)
-    {
-         if (array_key_exists($v, \NethServer\Module\FirewallRules\Index::$ndpiProtocolIcons)) {
-             return \NethServer\Module\FirewallRules\Index::$ndpiProtocolIcons[$v][0];
-         }
-         return 'fa-square-o';
-    }
-
 
     public function prepareViewForColumnKey(\Nethgui\Controller\Table\Read $action, \Nethgui\View\ViewInterface $view, $key, $values, &$rowMetadata)
     {
-        return ' <i class="fa fa-lg '.$this->getNdpiIcon($key).'" aria-hidden="true" style="margin: 5px"></i>' . $key;
+        $name = \NethServer\Module\FirewallRules\Index::resolveNdpiName($key);
+        return ' <i class="fa fa-lg '.\NethServer\Module\FirewallRules\Index::getNdpiIconName($name).'" aria-hidden="true" style="margin: 5px"></i>' . "$name ($key)" ;
     }
 
 }
