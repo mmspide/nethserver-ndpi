@@ -22,11 +22,16 @@
 # Force module reload
 # This is mandatory when switching from 2.2 to 2.4
 
+TIMEOUT=10
+
 set -e
 
 # Make sure the module is not used
 shorewall clear
-conntrack -F
-
-modprobe -r xt_ndpi
+while [ $TIMEOUT -ge 0 ]; do
+    conntrack -F
+    modprobe -r xt_ndpi && break
+    TIMEOUT=$(( $TIMEOUT - 1 ))
+    sleep 1
+done
 modprobe xt_ndpi
