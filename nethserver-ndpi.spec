@@ -9,7 +9,8 @@ License: GPL
 
 BuildRequires: nethserver-devtools
 
-Requires: kmod-xt_ndpi
+Requires: kmod-xt_ndpi > 2.3.0
+Requires: conntrack-tools
 
 %description
 Install and configure an nDPI kernel modules

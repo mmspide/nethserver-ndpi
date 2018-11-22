@@ -1,0 +1,52 @@
+{
+    #
+    # Migrate rules using NDPI from symbolic name to id.
+    #
+
+    use POSIX 'strtol';
+    our $map = undef;
+
+    sub init_map()
+    {
+        my $f = '/usr/share/nethserver-ndpi/ndpi-1.7.map';
+        open(my $fh, '<:encoding(UTF-8)', $f) or die "Could not open '$f': $!";
+ 
+        while (my $row = <$fh>) {
+            chomp $row;
+            my @tmp = split(/\s/, $row);
+            $map{$tmp[1]} = $tmp[0];
+        }
+    }
+
+
+    sub is_hex {
+        local $!;
+        return ! (POSIX::strtol($_[0], 16))[1];
+    }
+
+
+    use esmith::ConfigDB;
+    my $db = esmith::ConfigDB->open('fwrules');
+    foreach ($db->get_all_by_prop('type','rule')) {
+         my $service = $_->prop('Service') || next;
+         if ($service =~ /^ndpi;(.*)/) {
+             # skip already converted rules
+             next if (is_hex($1));
+
+             # delay map initialization
+             if (!defined($map)) {
+                 init_map();
+             }
+
+             # convert from name to id
+             # if the protocol doesn't exist anymore, disable the rule
+             if (exists($map{$1})) {
+                 $_->set_prop('Service', "ndpi;".$map{$1});
+             } else {
+                 $_->set_prop('status','disabled');
+             }
+         }
+    }
+
+    '';
+}

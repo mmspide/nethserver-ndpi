@@ -1,7 +1,5 @@
-#!/usr/bin/perl
-
 #
-# Copyright (C) 2016 Nethesis S.r.l.
+# Copyright (C) 2018 Nethesis S.r.l.
 # http://www.nethesis.it - nethserver@nethesis.it
 #
 # This script is part of NethServer.
@@ -19,11 +17,21 @@
 # You should have received a copy of the GNU General Public License
 # along with NethServer.  If not, see COPYING.
 #
+#
 
-use esmith::Build::CreateLinks  qw(:all);
+# Force module reload
+# This is mandatory when switching from 2.2 to 2.4
 
-event_actions('nethserver-ndpi-update', qw(
-   initialize-default-databases 00
-   nethserver-ndpi-conf 20
-));
+TIMEOUT=10
 
+set -e
+
+# Make sure the module is not used
+shorewall clear
+while [ $TIMEOUT -ge 0 ]; do
+    conntrack -F
+    modprobe -r xt_ndpi && break
+    TIMEOUT=$(( $TIMEOUT - 1 ))
+    sleep 1
+done
+modprobe xt_ndpi
