@@ -26,5 +26,3 @@ event_actions('nethserver-ndpi-update', qw(
    initialize-default-databases 00
    nethserver-ndpi-conf 20
 ));
-
-event_services('nethserver-ndpi-update', 'smwingsd' => 'restart');

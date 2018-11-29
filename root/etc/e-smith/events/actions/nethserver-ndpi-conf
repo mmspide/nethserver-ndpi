@@ -35,3 +35,7 @@ while [ $TIMEOUT -ge 0 ]; do
     sleep 1
 done
 modprobe xt_ndpi
+
+
+# Reload ndpi database for the UI
+systemctl restart smwingsd
