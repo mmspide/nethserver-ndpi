@@ -24,6 +24,14 @@
 
 TIMEOUT=10
 
+new_ver=$(modinfo -F srcversion xt_ndpi)
+old_ver=$(cat /sys/module/xt_ndpi/srcversion)
+
+# Reload only if the module has been updated
+if [ "$new_ver" == "$old_ver" ]; then
+   exit 0
+fi
+
 set -e
 
 # Make sure the module is not used
