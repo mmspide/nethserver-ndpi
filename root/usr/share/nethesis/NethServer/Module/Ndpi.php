@@ -46,7 +46,7 @@ class Ndpi extends \Nethgui\Controller\TableController
         );
 
         $this
-            ->setTableAdapter($this->getPlatform()->getTableAdapter('NethServer::Database::Ndpi'))
+            ->setTableAdapter($this->getPlatform()->getTableAdapter('NethServer::Database::Ndpi', 'ndpi'))
             ->setColumns($columns)
         ;
 
