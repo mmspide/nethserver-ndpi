@@ -3,13 +3,16 @@ Version: 1.2.0
 Release: 1%{?dist}
 Summary: Conifigure ndpi kernel modules
 Source: %{name}-%{version}.tar.gz
-BuildArch: noarch
+Source1: https://github.com/NethServer/xt_ndpi-kmod/releases/download/nDPI-2.8_3.10.0-957.el7/xt_ndpi.ko
 URL: %{url_prefix}/%{name}
 License: GPL
 
 BuildRequires: nethserver-devtools
 
-Requires: kmod-xt_ndpi > 2.3.0
+# Disable debuginfo creation
+%define debug_package %{nil}
+
+Requires: kmod-xt_ndpi > 2.7.0
 Requires: conntrack-tools
 
 %description
@@ -21,6 +24,8 @@ Install and configure an nDPI kernel modules
 %build
 %{makedocs}
 perl createlinks
+mkdir -p root/lib/modules/3.10.0-957.el7.x86_64/extra/xt_ndpi
+cp -p %{SOURCE1} root/lib/modules/3.10.0-957.el7.x86_64/extra/xt_ndpi/
 
 %install
 rm -rf %{buildroot}
@@ -32,6 +37,17 @@ rm -rf %{buildroot}
 %dir %{_nseventsdir}/%{name}-update
 
 %doc COPYING
+
+%post
+echo "Installing NethServer nDPI kernel module. This may take some time ..."
+echo "/lib/modules/3.10.0-957.el7.x86_64/extra/xt_ndpi/xt_ndpi.ko" | /sbin/weak-modules --add-modules
+echo "Done."
+
+%postun
+echo "Removing NethServer nDPI kernel module. This may take some time ..."
+echo "/lib/modules/3.10.0-957.el7.x86_64/extra/xt_ndpi/xt_ndpi.ko" | /sbin/weak-modules --remove-modules
+echo "Done."
+
 
 %changelog
 * Wed Dec 05 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.0-1
