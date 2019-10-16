@@ -20,7 +20,7 @@
 #
 
 # Force module reload
-# This is mandatory when switching from 2.2 to 2.4
+# This is mandatory when switching from older versions of xt_ndpi
 
 TIMEOUT=10
 
@@ -38,7 +38,7 @@ set -e
 shorewall clear
 while [ $TIMEOUT -ge 0 ]; do
     conntrack -F
-    modprobe -r xt_ndpi && break
+    rmmod xt_ndpi && break
     TIMEOUT=$(( $TIMEOUT - 1 ))
     sleep 1
 done
