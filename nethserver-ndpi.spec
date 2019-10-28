@@ -1,5 +1,5 @@
 Name: nethserver-ndpi
-Version: 1.3.1
+Version: 1.3.2
 Release: 1%{?dist}
 Summary: Conifigure ndpi kernel modules
 Source: %{name}-%{version}.tar.gz
@@ -50,6 +50,9 @@ echo "Done."
 
 
 %changelog
+* Mon Oct 28 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.3.2-1
+- Shorewall stopped after ndpi update - Bug NethServer/dev#5890
+
 * Wed Oct 16 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.3.1-1
 - shorewall stopped with ndpi and old 7.5 kernel - Bug NethServer/dev#5868
 
