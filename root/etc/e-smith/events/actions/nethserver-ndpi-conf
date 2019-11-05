@@ -19,10 +19,8 @@
 #
 #
 
-# Force module reload
+# Force ndpi rules unload
 # This is mandatory when switching from older versions of xt_ndpi
-
-TIMEOUT=10
 
 new_ver=$(modinfo -F srcversion xt_ndpi)
 old_ver=$(cat /sys/module/xt_ndpi/srcversion)
@@ -32,26 +30,5 @@ if [ "$new_ver" == "$old_ver" ]; then
    exit 0
 fi
 
-# Make sure the module is not used
-shorewall clear
-while [ $TIMEOUT -gt 0 ]; do
-    conntrack -F
-    rmmod xt_ndpi && break
-    modprobe -r xt_ndpi && break
-    TIMEOUT=$(( $TIMEOUT - 1 ))
-    sleep 1
-done
-if [ $TIMEOUT -eq 0 ]; then
-    echo unload_failed > /var/run/ndpi-lock
-    exit 1
-fi
-
-# Try to load the module
-modprobe xt_ndpi
-if [ $? -gt 0 ]; then
-    echo load_failed > /var/run/ndpi-lock
-    exit 1
-fi
-
-# Reload ndpi database for the UI
-systemctl restart smwingsd
+# Unload npdi rules on next firewall-adjust
+touch /var/run/ndpi-lock
