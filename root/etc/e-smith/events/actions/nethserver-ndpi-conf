@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # Copyright (C) 2018 Nethesis S.r.l.
 # http://www.nethesis.it - nethserver@nethesis.it
@@ -23,10 +24,10 @@
 # This is mandatory when switching from older versions of xt_ndpi
 
 new_ver=$(modinfo -F srcversion xt_ndpi)
-old_ver=$(cat /sys/module/xt_ndpi/srcversion)
+old_ver=$(cat /sys/module/xt_ndpi/srcversion 2>/dev/null)
 
 # Reload only if the module has been updated
-if [ "$new_ver" == "$old_ver" ]; then
+if [[ "$new_ver" == "$old_ver" || -z "$old_ver" ]]; then
    exit 0
 fi
 
