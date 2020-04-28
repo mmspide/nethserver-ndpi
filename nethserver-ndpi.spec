@@ -1,5 +1,5 @@
 Name: nethserver-ndpi
-Version: 1.3.3
+Version: 1.3.4
 Release: 1%{?dist}
 Summary: Conifigure ndpi kernel modules
 Source: %{name}-%{version}.tar.gz
@@ -34,6 +34,9 @@ rm -rf %{buildroot}
 %doc COPYING
 
 %changelog
+* Tue Apr 28 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.3.4-1
+- NDPI not started after install - Bug NethServer/dev#6130
+
 * Tue Nov 05 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.3.3-1
 - NDPI: try to avoid kernel panic - Bug NethServer/dev#5901
 
